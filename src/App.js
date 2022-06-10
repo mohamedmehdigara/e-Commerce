@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Routes, Route, Link, BrowserRouter as Router } from "react-router-dom";
-
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import AddProduct from './components/AddProduct';
 import Cart from './components/Cart';
 import Login from './components/Login';
@@ -17,6 +18,12 @@ export default class App extends Component {
       products: []
     };
     this.routerRef = React.createRef();
+  }
+
+  componentDidMount() {
+    let user = localStorage.getItem("user");
+    user = user ? JSON.parse(user) : null;
+    this.setState({ user });
   }
 
   render() {
